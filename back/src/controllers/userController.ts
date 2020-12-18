@@ -93,7 +93,25 @@ const userController = {
         return response.status(201).json({"id": user.id});
     },
 
-    
+    async alter(request: Request, response: Response) {
+        const { username, id } = request.body;
+
+        const userIdx = await usersData.users.findIndex(user => user.id == Number(id));
+
+        usersData.users[userIdx].name = username;
+
+        // Transforma em objeto JSON
+        const jsonData = JSON.stringify(usersData);
+
+        // Escreve no arquivo usersData.json
+        await fs.writeFile(path.join(__dirname, '..', 'data', 'usersData.json'), jsonData, (err) => {
+            if (err) {
+                return response.status(404).json({"ERROR": "Usuário não alterado, tente novamente."});
+            }
+            return response.json({"Sucesso": "Usuário alterado."});
+        });
+
+    }
 }
 
 export default userController;
