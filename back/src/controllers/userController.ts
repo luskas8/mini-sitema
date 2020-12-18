@@ -40,8 +40,10 @@ const userController = {
     async create(request: Request, response: Response) {
         const { username, password } = request.body;
 
-        // Pega a qnt de usuários cadastrados e adiciona 1
-        let currentId = Object.keys(usersData.users).length + 1;
+        // Pega a posição do ultimo usuário
+        let lastUser = Object.keys(usersData.users).length;
+
+        let currentId = usersData.users[lastUser-1].id + 1;
 
         const newUser: User = {
             id: Number(currentId),
@@ -67,7 +69,10 @@ const userController = {
     async delete(request: Request, response: Response) {
         const { id } = request.params;
 
-        usersData.users.splice(Number(id)-1, 1);
+        // Pega o index do usuário de id informado
+        const userIdx = await usersData.users.findIndex(user => user.id == Number(id));
+
+        usersData.users.splice(userIdx, 1);
 
         const jsonData = JSON.stringify(usersData);
 

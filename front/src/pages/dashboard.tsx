@@ -22,8 +22,17 @@ export default function Dashboard() {
 
     function logOut() {
         localStorage.clear();
-        alert(localStorage.getItem('id'));
         history.push('/');
+    }
+
+    async function deleteUser() {
+        await api.delete(`user/${myId}`)
+            .then(() => {
+                alert("Usuário deletado com sucesso!");
+                history.push('/');
+            }).catch(err => {
+                alert("Algo de errado ocorreu, tente novamente.");
+            });
     }
 
     async function formSubmit(e: FormEvent) {
@@ -52,7 +61,7 @@ export default function Dashboard() {
             <main>
                 <div className="input-block">
                     <label htmlFor="delete-btn">Deletar este usuário: </label>
-                    <input type="button" id="delete-btn" value="Delete"/>
+                    <input onClick={deleteUser} type="button" id="delete-btn" value="Delete"/>
                 </div>
 
                 <form onSubmit={formSubmit}>

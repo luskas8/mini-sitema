@@ -31,6 +31,7 @@ export default function Login() {
 
     return (
         <div id="page-login">
+            <h1>Login</h1>
             <p>Ainda não tem um usuário, crie um <Link to="/singin">aqui</Link></p>
             <form onSubmit={formSubmit}>
                 <div className="input-block">

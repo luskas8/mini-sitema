@@ -26,6 +26,7 @@ export default function Singin() {
     }
     return (
         <div id="page-singin">
+            <h1>Cadastro</h1>
             <form onSubmit={formSubmit}>
                 <div className="input-block">
                     <label htmlFor="username">Usuário</label>
