@@ -90,8 +90,10 @@ const userController = {
             return response.status(404).json({"ERRO": "Usuário ou senha inválidos."});
         }
 
-        return response.status(201).json(user.id);
-    }
+        return response.status(201).json({"id": user.id});
+    },
+
+    
 }
 
 export default userController;

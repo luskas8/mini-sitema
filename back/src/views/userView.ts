@@ -5,8 +5,7 @@ interface User {
 }
 
 export default function userView(user: User) {
-    const viewedUser = { 
-        id: user.id,
+    const viewedUser = {
         name: user.name,
      }
 
