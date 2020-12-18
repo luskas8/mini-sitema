@@ -93,9 +93,11 @@ const userController = {
         return response.status(201).json({"id": user.id});
     },
 
+    // Altera usuário
     async alter(request: Request, response: Response) {
         const { username, id } = request.body;
 
+        // Pega o index do usuário de id informado
         const userIdx = await usersData.users.findIndex(user => user.id == Number(id));
 
         usersData.users[userIdx].name = username;

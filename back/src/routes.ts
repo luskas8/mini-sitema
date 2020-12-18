@@ -3,14 +3,18 @@ import path from 'path';
 
 import userController from './controllers/userController';
 
-// Constante de roteamento dos módulos da aplicação
+// Constante de roteamento da aplicação
 const router = express.Router();
 
-// Rotas de usuário
+/* Rotas de usuário */
 router.get('/user/:id', userController.index);
+
 router.put('/user', userController.alter);
+
 router.post('/user', userController.create);
+
 router.delete('/user/:id', userController.delete);
+
 router.post('/user/session', userController.create_session);
 
 export default router;

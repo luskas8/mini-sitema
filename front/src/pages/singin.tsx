@@ -1,8 +1,8 @@
 import React, { FormEvent, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import api from '../services/api';
 
-export default function Login() {
+export default function Singin() {
     const history = useHistory();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -13,25 +13,19 @@ export default function Login() {
         const data = {
             username,
             password,
-        };
-
-        try {
-            const response = await api.post('user/session', data);
-
-            localStorage.setItem("id", response.data.id);
-
-            alert("Bem-vindo!");
-            history.push('/dashboard');
-        } catch(err) {
-            alert('Erro no login, tente novamente.');
         }
 
+        try {
+            await api.post('user', data);
 
+            alert("Cadastro realizada, que tal logar-se agora!");
+            history.push('/');
+        } catch(err) {
+            alert('Erro no cadatro, tente novamente.');
+        }
     }
-
     return (
-        <div id="page-login">
-            <p>Ainda não tem um usuário, crie um <Link to="/singin">aqui</Link></p>
+        <div id="page-singin">
             <form onSubmit={formSubmit}>
                 <div className="input-block">
                     <label htmlFor="username">Usuário</label>
@@ -56,7 +50,7 @@ export default function Login() {
                 </div>
 
                 <div className="input-block">
-                    <button type="submit">Logar</button>
+                    <button type="submit">Cadastrar</button>
                 </div>
             </form>
         </div>
